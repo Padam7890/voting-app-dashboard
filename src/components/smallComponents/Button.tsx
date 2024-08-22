@@ -15,7 +15,7 @@ const Button = ({
   return (
     <button
      type={type}
-      className={`w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 ${className}`}
+      className={`cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 ${className}`}
       {...props}
     >
       {label}
