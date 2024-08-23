@@ -22,8 +22,16 @@ export const showToast = (
         type: "error",
         autoClose: 5000,
       });
+
       break;
     default:
       break;
   }
 };
+
+
+//dismiss toast 
+export const dismissToast = ()=>{
+  toast.dismiss();
+}
+

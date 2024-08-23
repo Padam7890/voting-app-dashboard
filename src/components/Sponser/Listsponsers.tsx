@@ -1,12 +1,36 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../smallComponents/Button";
 import TableHeading from "../Tables/Table/TableHeading";
 import Table from "../Tables/Table/Table";
 import Thead from "../Tables/Table/Thead";
 import Link from "next/link";
+import { useGetSponsersQuery } from "@/redux/api/sponserApi/sponserAPi";
+import { dismissToast, showToast } from "@/utils/toastNotification";
+import { handleError } from "@/helper/errorHandler";
 
 const Listsponsers = () => {
+  const {
+    data: SponserData,
+    isError: SponsersIsError,
+    isLoading: SponsersisLoading,
+    error: SponserError,
+  } = useGetSponsersQuery();
+
+  console.log(useGetSponsersQuery());
+
+  if (SponsersIsError) {
+    if (SponserError) {
+      handleError(SponserError);
+    }
+  }
+  if (SponsersisLoading) {
+    showToast("loading", "Sponser list loading");
+  }
+  if (!SponsersisLoading) {
+    dismissToast();
+  }
+
   return (
     <div className=" relative h-full w-full">
       <div className=" flex items-center justify-between">
@@ -18,7 +42,7 @@ const Listsponsers = () => {
           onClick={() => {}}
         ></Button>
       </div>
-      <div className=" relative overflow-x-auto shadow-md sm:rounded-xl mt-5 dark:bg-black pb-4">
+      <div className=" relative mt-5 overflow-x-auto pb-4 shadow-md dark:bg-black sm:rounded-xl">
         <TableHeading />
         <Table>
           <Thead>
@@ -33,24 +57,25 @@ const Listsponsers = () => {
             </tr>
           </Thead>
           <tbody>
-            <tr className="border-b border-gray dark:border-stone-500 bg-white dark:bg-black dark:text-white">
-              <td className="p-4">1</td>
-              <td>ABC Sponsor</td>
-              <td>+91 9876543210</td>
-              <td>Image</td>
-              <td className="flex items-center gap-2 px-4 py-4">
-                <Link
-                  className=" rounded-lg bg-green-500 px-3 py-1 text-center text-xs font-normal text-white"
-                  href={`/edit/${1}`}
-                >
-                  Edit
-                </Link>
-                <div className=" rounded-lg bg-red px-3 py-1 text-center text-xs font-normal text-white">
-                  Delete
-                </div>
-              </td>
-            </tr>
-
+            {SponserData?.data.map((sponserdata, index) => (
+              <tr className="border-b border-gray bg-white dark:border-stone-500 dark:bg-black dark:text-white">
+                <td className="p-4">1</td>
+                <td>{sponserdata.title}</td>
+                <td>+91 9876543210</td>
+                <td>Image</td>
+                <td className="flex items-center gap-2 px-4 py-4">
+                  <Link
+                    className=" rounded-lg bg-green-500 px-4 py-2 text-center text-xs font-normal text-white"
+                    href={`/edit/${1}`}
+                  >
+                    Edit
+                  </Link>
+                  <div className=" cursor-pointer rounded-lg bg-red px-4 py-2 text-center text-xs font-normal text-white">
+                    Delete
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

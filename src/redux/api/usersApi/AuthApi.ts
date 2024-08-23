@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_BASE_URL, ORGANIZATION_ID } from "@/config";
-import { baseQuery } from "../../config/Authapiconfig";
+import { baseQuery } from "../../config/authApiconfig";
 import { XapiResponse } from "@/types/XapiResponse";
 
 // Interface for login data
