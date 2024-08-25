@@ -5,3 +5,5 @@ export const PERSIST_VERSION = parseInt(process.env.NEXT_PUBLIC_PERSIST_VERSION!
 export const PERSIST_KEY = process.env.NEXT_PUBLIC_PERSIST_KEY!;
 export const ORGANIZATION_ID = process.env.NEXT_PUBLIC_ORGANIZATION_ID!;
 export const VOTING_USER_BASE_URI = process.env.NEXT_PUBLIC_VOTING_USER_BASE_URI!;
+export const S3_URL = "https://supreme-test.s3.amazonaws.com/"
+

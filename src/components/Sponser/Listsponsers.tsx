@@ -5,9 +5,13 @@ import TableHeading from "../Tables/Table/TableHeading";
 import Table from "../Tables/Table/Table";
 import Thead from "../Tables/Table/Thead";
 import Link from "next/link";
-import { useGetSponsersQuery } from "@/redux/api/sponserApi/sponserAPi";
+import {
+  useDeleteSponserMutation,
+  useGetSponsersQuery,
+} from "@/redux/api/sponserApi/sponserAPi";
 import { dismissToast, showToast } from "@/utils/toastNotification";
 import { handleError } from "@/helper/errorHandler";
+import { S3_URL } from "@/config";
 
 const Listsponsers = () => {
   const {
@@ -17,6 +21,16 @@ const Listsponsers = () => {
     error: SponserError,
   } = useGetSponsersQuery();
 
+  const [
+    deleteSponser,
+    {
+      isError: deleteSponserError,
+      isLoading: delSponserILoad,
+      error: delsponserError,
+      isSuccess:delSponserSuccess
+    },
+  ] = useDeleteSponserMutation();
+
   console.log(useGetSponsersQuery());
 
   if (SponsersIsError) {
@@ -25,11 +39,28 @@ const Listsponsers = () => {
     }
   }
   if (SponsersisLoading) {
-    showToast("loading", "Sponser list loading");
+    showToast("loading", "Sponser list loading",);
   }
   if (!SponsersisLoading) {
     dismissToast();
   }
+
+  useEffect(() => {
+  if (delSponserILoad) {
+    showToast("loading", "Sponser deleting");
+  } else if (deleteSponserError && delsponserError) {
+    handleError(delsponserError);
+  } else if (delSponserSuccess) {
+    dismissToast();
+    showToast("success", "Sponser deleted successfully" );
+  } else {
+    dismissToast();
+  }
+}, [delSponserILoad, deleteSponserError, delsponserError, delSponserSuccess]);
+
+const deleteSpon = (id: string) => {
+  deleteSponser(id);
+};
 
   return (
     <div className=" relative h-full w-full">
@@ -62,7 +93,13 @@ const Listsponsers = () => {
                 <td className="p-4">1</td>
                 <td>{sponserdata.title}</td>
                 <td>+91 9876543210</td>
-                <td>Image</td>
+                <td className="image">
+                  <img
+                    className="w-10"
+                    src={S3_URL.concat(sponserdata?.logo)}
+                    alt="pic"
+                  />
+                </td>{" "}
                 <td className="flex items-center gap-2 px-4 py-4">
                   <Link
                     className=" rounded-lg bg-green-500 px-4 py-2 text-center text-xs font-normal text-white"
@@ -70,7 +107,7 @@ const Listsponsers = () => {
                   >
                     Edit
                   </Link>
-                  <div className=" cursor-pointer rounded-lg bg-red px-4 py-2 text-center text-xs font-normal text-white">
+                  <div onClick={()=> deleteSpon(sponserdata.id)} className=" cursor-pointer rounded-lg bg-red px-4 py-2 text-center text-xs font-normal text-white">
                     Delete
                   </div>
                 </td>

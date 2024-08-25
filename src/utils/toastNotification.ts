@@ -1,37 +1,36 @@
-// src/utils/toastNotifications.ts
 import { toast } from "react-toastify";
 
 export const showToast = (
   status: "loading" | "success" | "error",
   message: string,
+  toastId: string = "loading"
 ) => {
   switch (status) {
     case "loading":
-      toast.info(message, { autoClose: false, toastId: "loading" });
+      // Show loading toast with unique toastId
+      toast.info(message, { autoClose: false, toastId });
       break;
     case "success":
-      toast.update("loading", {
+      // Ensure toast exists before updating
+      toast.update(toastId, {
         render: message,
         type: "success",
         autoClose: 5000,
       });
       break;
     case "error":
-      toast.update("loading", {
+      toast.update(toastId, {
         render: message,
         type: "error",
         autoClose: 5000,
       });
-
       break;
     default:
       break;
   }
 };
 
-
-//dismiss toast 
-export const dismissToast = ()=>{
-  toast.dismiss();
-}
-
+// Dismiss specific toast
+export const dismissToast = (toastId: string = "loading") => {
+  toast.dismiss(toastId);
+};

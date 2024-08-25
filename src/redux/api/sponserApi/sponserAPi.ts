@@ -15,7 +15,14 @@ export const sponserApi = createApi({
       query: () => "/sponsers",
       providesTags: ["Sponsors"],
     }),
+    deleteSponser: builder.mutation({
+      query: (id) => ({
+        url: `/sponsers/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags:['Sponsors']
+    })
   }),
 });
 
-export const { useGetSponsersQuery } = sponserApi;
+export const { useGetSponsersQuery ,useDeleteSponserMutation} = sponserApi;

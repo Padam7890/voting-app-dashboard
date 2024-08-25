@@ -1,7 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit/react";
 import { AuthApi } from "./api/usersApi/AuthApi";
 import { UsersApi } from "./api/usersApi/UsersApi";
 import { sponserApi } from "./api/sponserApi/sponserAPi";
+
 
 export const store = configureStore({
   reducer: {
