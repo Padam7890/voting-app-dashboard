@@ -29,8 +29,18 @@ export const sponserApi = createApi({
         body: sponser,
       }),
       invalidatesTags:['Sponsors']
+    }),
+    //updateSponsors
+    getOneSponser:builder.query<Sponsers, void>({
+      query: (id) => ({
+        url: `/sponsers/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Sponsors"],
     })
+
+
   }),
 });
 
-export const { useGetSponsersQuery ,useDeleteSponserMutation,useAddSponserMutation} = sponserApi;
+export const { useGetSponsersQuery ,useDeleteSponserMutation,useAddSponserMutation ,useGetOneSponserQuery} = sponserApi;

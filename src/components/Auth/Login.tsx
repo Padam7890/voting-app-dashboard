@@ -10,7 +10,7 @@ import { loginValidation } from "@/utils/validations/Login/loginValidation";
 import { useLoginMutation } from "@/redux/api/usersApi/AuthApi";
 import { EyeClosedIcon, EyeOpenIcon } from "@/helper/Icons/icon";
 import { LoginPage } from "@/types/inputProps";
-import { showToast } from "@/utils/toastNotification";
+import { dismissToast, loadingToast, successToast } from "@/utils/toastNotification";
 import { handleError } from "@/helper/errorHandler";
 import { saveToken } from "@/utils/auth";
 import { useRouter } from "next/navigation";
@@ -38,19 +38,20 @@ const Login = () => {
       await login({ email: values.email, password: values.password });
     } catch (error) {
       console.error(error);
-      showToast("error", "Login error");
+      handleError(error);
     }
   };
   useEffect(() => {
     if (isLoading) {
-      showToast("loading", "Login progress");
+      loadingToast("Login progress");
     } else if (isError) {
       if (error) {
         handleError(error);
       }
       console.log(error);
     } else if (isSuccess) {
-      showToast("success", "Login success");
+      dismissToast();
+      successToast("Login success");
       if (data.data.token) {
         saveToken(data.data.token);
         // Redirect to dashboard page

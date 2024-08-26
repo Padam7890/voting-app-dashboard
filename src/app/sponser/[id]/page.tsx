@@ -1,11 +1,12 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { EditSponser } from "@/helper/dynamic-imports/components";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import React from "react";
 
-const page = ({ params }: any) => {
+const page = ({ params }: Params) => {
   return (
     <DefaultLayout>
-      <EditSponser />
+      <EditSponser sponserId={params.id}  />
     </DefaultLayout>
   );
 };

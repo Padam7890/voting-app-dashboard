@@ -34,9 +34,7 @@ const Listsponsers = () => {
     },
   ] = useDeleteSponserMutation();
 
-  console.log(useGetSponsersQuery());
-
-
+ 
   useEffect(() => {
   if (delSponserILoad) {
     successToast("Sponser deleting");
