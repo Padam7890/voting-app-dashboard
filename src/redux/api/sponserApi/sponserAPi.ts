@@ -21,8 +21,16 @@ export const sponserApi = createApi({
         method: "DELETE",
       }),
       invalidatesTags:['Sponsors']
+    }),
+    addSponser: builder.mutation<SponserData, FormData>({
+      query: (sponser) => ({
+        url: "/sponsers",
+        method: "POST",
+        body: sponser,
+      }),
+      invalidatesTags:['Sponsors']
     })
   }),
 });
 
-export const { useGetSponsersQuery ,useDeleteSponserMutation} = sponserApi;
+export const { useGetSponsersQuery ,useDeleteSponserMutation,useAddSponserMutation} = sponserApi;

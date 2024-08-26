@@ -6,7 +6,7 @@ export interface InputProps {
   formik: any; // Update this with the correct type
   id: string;
   name: string;
-  value: string;
+  value?: string;
   onChange: (event: React.ChangeEvent<any>) => void;
   onBlur: (event: React.FocusEvent<any>) => void;
   multiple?: boolean;
@@ -15,9 +15,10 @@ export interface InputProps {
   title: string;
   checked?: boolean;
   hidden?: boolean;
+  accept?:string
   childrens?: Array<any>;
 }
-export interface LoginPage{
-    email: string;
-    password: string;
+export interface LoginPage {
+  email: string;
+  password: string;
 }

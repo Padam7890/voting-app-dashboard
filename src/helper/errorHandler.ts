@@ -1,8 +1,8 @@
 // Importing necessary types from @reduxjs/toolkit
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { SerializedError } from '@reduxjs/toolkit';
-import { showToast } from '@/utils/toastNotification';
 import { ErrorResponseData } from '@/types/error';
+import { errorToast } from '@/utils/toastNotification';
 
 
 
@@ -35,7 +35,7 @@ const isFetchBaseQueryError = (error: any): error is FetchBaseQueryError =>
       errorMessage = error.message || "An error occurred";
     }
   
-    showToast("error", errorMessage);
+    errorToast(errorMessage);
     console.log(error);
   };
   

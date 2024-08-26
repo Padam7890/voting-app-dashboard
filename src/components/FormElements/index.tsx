@@ -1,10 +1,5 @@
 "use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import CheckboxFive from "@/components/Checkboxes/CheckboxFive";
-import CheckboxFour from "@/components/Checkboxes/CheckboxFour";
-import CheckboxOne from "@/components/Checkboxes/CheckboxOne";
-import CheckboxThree from "@/components/Checkboxes/CheckboxThree";
-import CheckboxTwo from "@/components/Checkboxes/CheckboxTwo";
 import SwitcherFour from "@/components/Switchers/SwitcherFour";
 import SwitcherOne from "@/components/Switchers/SwitcherOne";
 import SwitcherThree from "@/components/Switchers/SwitcherThree";
@@ -177,11 +172,11 @@ const FormElements = () => {
               </h3>
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
-              <CheckboxOne />
+              {/* <CheckboxOne />
               <CheckboxTwo />
               <CheckboxThree />
               <CheckboxFour />
-              <CheckboxFive />
+              <CheckboxFive /> */}
             </div>
           </div>
 
