@@ -5,7 +5,6 @@ import { ErrorResponseData } from '@/types/error';
 import { errorToast } from '@/utils/toastNotification';
 
 
-
 // Type guard for FetchBaseQueryError
 const isFetchBaseQueryError = (error: any): error is FetchBaseQueryError =>
     error && 'status' in error && 'data' in error;
@@ -39,3 +38,4 @@ const isFetchBaseQueryError = (error: any): error is FetchBaseQueryError =>
     console.log(error);
   };
   
+
